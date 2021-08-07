@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>settings</ion-title>
+    <ion-buttons slot="end" >
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center">
+  <div class="success-bg ion-padding">
+    <ion-avatar (click)="takeFoto()">
+      <img [src]="userImages" *ngIf="!photo">
+      <img [src]="photo" *ngIf="photo">
+    </ion-avatar>
+    <h1>Manuel Serna</h1>
+    <h2>emial@gma.com</h2>
+    <ion-grid>
+      <ion-row class="ion-align-items-center row-header">
+        <ion-col>140</ion-col>
+        <ion-col>2k</ion-col>
+        <ion-col>500</ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center">
+        <ion-col>artistas</ion-col>
+        <ion-col>seguidores</ion-col>
+        <ion-col>canciones</ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+</ion-content>
