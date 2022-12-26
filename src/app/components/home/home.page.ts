@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { PlatziMusicService } from '../services/platzi-music.service';
+import { PlatziMusicService } from 'src/app/services/api/auth/platzi-music.service';
 import { SongModalPage } from '../song-modal/song-modal.page';
 
 @Component({

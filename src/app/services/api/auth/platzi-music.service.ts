@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as dataArtists from './artists.json';
+import * as dataArtists from '../../artists.json';
 
 @Injectable({
   providedIn: 'root'
