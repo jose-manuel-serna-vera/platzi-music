@@ -1,11 +1,11 @@
 <ion-split-pane contentId="content">
-  <ion-menu contentId="content" side="end">
+  <ion-menu contentId="content" side="start">
     <ion-header>
       <ion-toolbar color="success">
         <ion-title>Menu</ion-title>
         <ion-buttons slot="start">
           <ion-button icon-only (click)="closeMenu()">
-            <ion-icon name="arrow-forward-outline" size="large"></ion-icon>
+            <ion-icon name="menu" size="large"></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
@@ -15,16 +15,16 @@
     <ion-content>
       <ion-list>
         <ion-item  (click)="goToHome()">
-          <ion-icon name="home-outline" color="success" slot="start"></ion-icon> Home
+          <ion-icon name="home-outline" color="success" slot="end"></ion-icon> Home
         </ion-item>
         <ion-item  (click)="goToSports()">
-          <ion-icon name="car-sport-outline" color="success" slot="start"></ion-icon> Sports
+          <ion-icon name="car-sport-outline" color="success" slot="end"></ion-icon> Sports
         </ion-item>
         <ion-item (click)="goTosettings()">
-          <ion-icon name="settings-outline" color="success" slot="start"></ion-icon> Settings
+          <ion-icon name="settings-outline" color="success" slot="end"></ion-icon> Settings
         </ion-item>
         <ion-item (click)="logout()">
-          <ion-icon name="log-out-outline" color="success" slot="start"></ion-icon> Salir
+          <ion-icon name="log-out-outline" color="success" slot="end"></ion-icon> Salir
         </ion-item>
       </ion-list>
     </ion-content>
