@@ -9,115 +9,48 @@ import { SongModalPage } from '../song-modal/song-modal.page';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  urlSong = "";
-  artists = [];
-  songs = [];
-  song: any = {};
-  albums = [];
-  slideOps = {
-    initialSlide: 2,
-    slidesPerView: 4,
-    centeredSlides: true,
-    speed: 400
-  };
-  currentSong: any = {};
-  newTime;
-  constructor(
-    private musicServices: PlatziMusicService,
-    private modalController: ModalController
-  ) {
+  items: any[] = [];
 
-  }
-  ionViewDidEnter() {
-    this.musicServices.getNewReleases().then(newReleases => {
-      this.artists = this.musicServices.getArtists().items;
-      this.songs = newReleases.albums.items.filter(e => e.album_type == "single");
-      this.albums = newReleases.albums.items.filter(e => e.album_type == "album");
-    }).catch(error => {
-      console.log(error);
-    });
-  }
+  constructor() {
+    for (let i = 0; i < 1000; i++) {
+      this.items.push({
+        name: i + ' - ' + images[rotateImg],
+        imgSrc: getImgSrc(),
+        avatarSrc: getImgSrc(),
+        imgHeight: Math.floor(Math.random() * 50 + 150),
+        content: lorem.substring(0, Math.random() * (lorem.length - 100) + 100)
+      });
 
-
-  async showSongs(artist) {
-    const songs = await this.musicServices.getArtistsTopTracks(artist.id);
-
-    const modal = await this.modalController.create({
-      component: SongModalPage,
-      componentProps: {
-        songs: songs.tracks,
-        artist: artist.name
+      rotateImg++;
+      if (rotateImg === images.length) {
+        rotateImg = 0;
       }
-    });
-    modal.onDidDismiss().then(dataReturned => {
-      this.song = dataReturned.data;
-    });
-
-    return await modal.present();
-  }
-
-  async showAlbums(album) {
-    const songs = await this.musicServices.getAlbumTracks(album.id);
-
-    const modal = await this.modalController.create({
-      component: SongModalPage,
-      componentProps: {
-        songs: songs.items,
-        artist: album.name
-      }
-    });
-    modal.onDidDismiss().then(dataReturned => {
-      this.song = dataReturned.data;
-    });
-
-    return await modal.present();
-  }
-
-  play() {
-    // stopanterior
-    if (this.urlSong != "") {
-      this.currentSong.setAttribute('src', this.urlSong); //change the source
-      this.currentSong.load();
-      this.currentSong.pause();
-    }
-    this.currentSong = new Audio();
-    this.currentSong.setAttribute('src', this.song.preview_url); //change the source
-    this.currentSong.load();
-    this.currentSong.play();
-    this.urlSong = this.song.preview_url;
-
-    this.currentSong.addEventListener("timeupdate", () => {
-      this.newTime = (this.currentSong.currentTime / this.currentSong.duration);
-      if (this.newTime == 1) {
-        this.song.playing = false;
-      }
-    })
-
-    this.song.playing = true;
-  } 
-
-  pause() {
-    this.currentSong.pause();
-    this.song.playing = false;
-  }
-
-  parseTime(time = "0:00") {
-    if (time) {
-      const partTime = parseInt(time.toString().split(".")[0], 10);
-      let minutes = Math.floor(partTime / 60).toString();
-
-      if (minutes.length == 1) {
-        minutes = "0" + minutes;
-      }
-
-      let seconds = (partTime % 60).toString();
-
-      if (seconds.length == 1) {
-        seconds = "0" + seconds;
-      }
-
-      return minutes + ":" + seconds;
     }
   }
-
 }
+
+const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
+const images = [
+  'bandit',
+  'batmobile',
+  'blues-brothers',
+  'bueller',
+  'delorean',
+  'eleanor',
+  'general-lee',
+  'ghostbusters',
+  'knight-rider',
+  'mirth-mobile'
+];
+
+function getImgSrc() {
+  const src = 'https://dummyimage.com/600x400/${Math.round( Math.random() * 99999)}/fff.png';
+  rotateImg++;
+  if (rotateImg === images.length) {
+    rotateImg = 0;
+  }
+  return src;
+}
+
+let rotateImg = 0;
